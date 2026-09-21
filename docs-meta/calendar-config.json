@@ -1,0 +1,83 @@
+{
+  "semester": {
+    "course": "Network Security",
+    "code": "NS-401",
+    "audience": "BS Computer Science / BS Data Science — 7th Semester",
+    "start_date": "",
+    "lecture_days": [
+      "Monday",
+      "Wednesday"
+    ],
+    "lab_day": null,
+    "lecture_start": "09:00",
+    "lecture_hours": 2,
+    "_comment_start_date": "Set to the Monday of week 1 (e.g. 2027-01-11) to emit real dates and a downloadable .ics. Leave empty for a generic Week 1..16 calendar with no dates.",
+    "_comment_lab_day": "Optional weekday name; if set, labs get their own calendar slot when dates are on. null = labs ride the second lecture day.",
+    "_comment_overrides": "Optional per-week date overrides: { \"6\": \"2027-02-22\" } moves week 6's Monday. Use for public holidays and reading weeks.",
+    "overrides": {}
+  },
+  "week_theme": {
+    "1": "Foundations — the security mindset and the packets it defends",
+    "2": "Transport & application protocols, read from real captures",
+    "3": "Threat modeling and the local-network attack surface",
+    "4": "Session attacks and availability under fire",
+    "5": "Architecture begins: segmentation and egress control",
+    "6": "Perimeter engineering: firewalls and rulebases",
+    "7": "Cryptography: primitives and TLS in practice",
+    "8": "Secure channels: VPN architectures (midterm week)",
+    "9": "Wireless and cloud control planes",
+    "10": "Enterprise wireless and cloud assurance",
+    "11": "Detection foundations and IDS/IPS engineering",
+    "12": "Behavioral analytics and vulnerability management",
+    "13": "Incident response: preparation, triage, containment",
+    "14": "Recovery, SOC operations, and threat hunting",
+    "15": "Network forensics and defensible reporting",
+    "16": "Capstone: simulation, defense, and course synthesis"
+  },
+  "graded_practicals": {
+    "Lab-06": 1,
+    "Lab-07": 2,
+    "Lab-10": 3,
+    "Lab-11": 4
+  },
+  "case_sets": {
+    "A": {
+      "weeks": [
+        4,
+        5
+      ],
+      "tier_mix": "beginner x2 + intermediate x1",
+      "clos": [
+        "CLO-1",
+        "CLO-2"
+      ]
+    },
+    "B": {
+      "weeks": [
+        8
+      ],
+      "tier_mix": "intermediate x2 + advanced x1",
+      "clos": [
+        "CLO-2",
+        "CLO-3",
+        "CLO-6"
+      ]
+    },
+    "C": {
+      "weeks": [
+        13
+      ],
+      "tier_mix": "advanced x2 + expert x1",
+      "clos": [
+        "CLO-10",
+        "CLO-12",
+        "CLO-14"
+      ]
+    }
+  },
+  "links": {
+    "site_root": "/Network-Security-Course/",
+    "repo_root": "https://github.com/nadeem-majeedch/Network-Security-Course/blob/main/"
+  },
+  "_comment_links": "site_root: public website base path (used by site pages). repo_root: for instructor/repo-only views. Lecture/lab links are site paths; solution/key links resolve under repo_root."
+}

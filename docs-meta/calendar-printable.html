@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Semester Calendar - Network Security (NS-401)</title>
+<style>
+    :root { --ink:#1a2433; --muted:#5b6b7f; --line:#d7dee8; --brand:#283593; --chip:#e8eaf6; }
+    * { box-sizing:border-box; }
+    body { font-family:'Segoe UI',-apple-system,system-ui,sans-serif; color:var(--ink); margin:0; padding:24px; background:#f5f7fa; }
+    .toolbar { max-width:900px; margin:0 auto 16px; display:flex; gap:8px; align-items:center; }
+    .toolbar button { border:1px solid var(--line); background:#fff; padding:6px 14px; border-radius:6px; cursor:pointer; font-size:14px; }
+    .wrap { max-width:900px; margin:0 auto; background:#fff; border:1px solid var(--line); border-radius:10px; padding:28px 32px; }
+    h1 { font-size:22px; margin:0 0 4px; color:var(--brand); }
+    .meta { color:var(--muted); font-size:13px; margin-bottom:18px; }
+    table { width:100%; border-collapse:collapse; font-size:13px; }
+    th { background:var(--chip); text-align:left; padding:8px 10px; border:1px solid var(--line); }
+    td { padding:8px 10px; border:1px solid var(--line); vertical-align:top; }
+    tr { page-break-inside:avoid; }
+    .wk { font-weight:700; white-space:nowrap; }
+    .theme { color:var(--muted); font-style:italic; font-size:12px; }
+    .dates { color:var(--muted); font-size:12px; white-space:nowrap; }
+    .lec { font-weight:600; }
+    .tag { display:inline-block; padding:1px 7px; border-radius:10px; font-size:11px; margin:1px 2px 1px 0; background:var(--chip); color:var(--brand); white-space:nowrap; }
+    .tag.exam { background:#fdecea; color:#b71c1c; font-weight:700; }
+    .tag.quiz { background:#fff8e1; color:#8d6e00; font-weight:600; }
+    .tag.due { background:#e8f5e9; color:#1b5e20; }
+    @media print {
+      body { background:#fff; padding:0; font-size:12px; }
+      .toolbar { display:none; }
+      .wrap { border:none; max-width:none; padding:0; }
+      thead { display:table-header-group; }
+    }
+    </style>
+</head>
+<body>
+<div class="toolbar">
+  <button onclick="window.print()">Print / Save as PDF</button>
+  <span class="meta">Generated 21 Sep 2026 from the finalized course content.</span>
+</div>
+<div class="wrap">
+<h1>Network Security (NS-401) &mdash; 16-Week Semester Calendar</h1>
+<div class="meta">BS Computer Science / BS Data Science — 7th Semester &middot; 32 lectures &times; 2 h &middot; 16 labs &middot; 100 case studies &middot; capstone with oral defense</div>
+<table>
+<thead><tr><th>Week</th><th>Lecture A</th><th>Lecture B</th><th>Lab</th><th>Assessment &amp; due items</th></tr></thead>
+<tbody>
+<tr><td class='wk'>W1<br><span class='dates'></span></td><td><span class='lec'>L01</span> Security Mindset & the Network Threat Landscape<br><span class='theme'>CLO-1</span></td><td><span class='lec'>L02</span> Protocol Deep Dive I — Ethernet, ARP, IP, ICMP<br><span class='theme'>CLO-1</span></td><td><span class='tag'>Lab-01</span> Lab-Range Orientation, Baseline & Topology Documentation</td><td><span class='tag'>Self-check</span></td></tr>
+<tr><td class='wk'>W2<br><span class='dates'></span></td><td><span class='lec'>L03</span> Protocol Deep Dive II — TCP, UDP, DNS, DHCP<br><span class='theme'>CLO-1</span></td><td><span class='lec'>L04</span> Applied Packet Analysis & Web Protocols<br><span class='theme'>CLO-1</span></td><td><span class='tag'>Lab-02</span> Packet Capture & Protocol Analysis with Wireshark</td><td><span class='tag quiz'>Quiz 1</span> Graded quiz, in-class, 20 min</td></tr>
+<tr><td class='wk'>W3<br><span class='dates'></span></td><td><span class='lec'>L05</span> Threat Modeling & Attacker Anatomy<br><span class='theme'>CLO-2</span></td><td><span class='lec'>L06</span> Layer-2 & LAN Attacks<br><span class='theme'>CLO-2</span></td><td><span class='tag'>Lab-03</span> Layer-2 Attack Evidence Analysis (ARP/DHCP)</td><td><span class='tag'>Self-check</span></td></tr>
+<tr><td class='wk'>W4<br><span class='dates'></span></td><td><span class='lec'>L07</span> Sniffing, MITM & Session Attacks<br><span class='theme'>CLO-2</span></td><td><span class='lec'>L08</span> DoS/DDoS & Infrastructure Abuse<br><span class='theme'>CLO-2</span></td><td><span class='tag'>Lab-04</span> MITM & Flood Telemetry Analysis</td><td><span class='tag quiz'>Quiz 2</span> Graded quiz, in-class, 20 min<br><span class='tag'>Case Set A</span> beginner x2 + intermediate x1</td></tr>
+<tr><td class='wk'>W5<br><span class='dates'></span></td><td><span class='lec'>L09</span> Defense in Depth & Network Segmentation<br><span class='theme'>CLO-3</span></td><td><span class='lec'>L12</span> NAT, Proxies, Egress & NAC<br><span class='theme'>CLO-3</span></td><td><span class='tag'>Lab-05</span> Segmentation & Proxy Egress Design</td><td><span class='tag quiz'>Quiz 3</span> Graded quiz, in-class, 20 min<br><span class='tag'>Case Set A</span> beginner x2 + intermediate x1</td></tr>
+<tr><td class='wk'>W6<br><span class='dates'></span></td><td><span class='lec'>L10</span> Firewalls: Concepts & Placement<br><span class='theme'>CLO-3, CLO-4</span></td><td><span class='lec'>L11</span> ACLs & Rulebase Engineering<br><span class='theme'>CLO-4</span></td><td><span class='tag'>Lab-06</span> Firewall Rulebase Build & ACL Audit (pfSense)</td><td><span class='tag'>Self-check</span><br><span class='tag due'>Assignment 1 released</span> Released; end of week 6</td></tr>
+<tr><td class='wk'>W7<br><span class='dates'></span></td><td><span class='lec'>L13</span> Cryptographic Foundations<br><span class='theme'>CLO-5</span></td><td><span class='lec'>L14</span> TLS Deep Dive<br><span class='theme'>CLO-6</span></td><td><span class='tag'>Lab-07</span> Lab PKI, TLS Configuration Audit</td><td><span class='tag'>Self-check</span><br><span class='tag due'>Assignment 2 released</span> Released; end of week 7</td></tr>
+<tr><td class='wk'>W8<br><span class='dates'></span></td><td><span class='lec'>L15</span> IPsec & Legacy VPN Architecture<br><span class='theme'>CLO-7</span></td><td><span class='lec'>L16</span> Modern VPNs & Crypto Agility<br><span class='theme'>CLO-5, CLO-7</span></td><td><span class='tag'>Lab-08</span> Site-to-Site VPN Build & Evaluate</td><td><span class='tag'>Self-check</span><br><span class='tag exam'>MIDTERM</span> Written exam, modules 1-4<br><span class='tag'>Case Set B</span> intermediate x2 + advanced x1</td></tr>
+<tr><td class='wk'>W9<br><span class='dates'></span></td><td><span class='lec'>L17</span> Wireless Fundamentals & Threats<br><span class='theme'>CLO-8</span></td><td><span class='lec'>L19</span> Cloud Networking I — VPC Design & Controls<br><span class='theme'>CLO-13</span></td><td><span class='tag'>Lab-09</span> Wireless Characterization + VPC Segmentation</td><td><span class='tag'>Self-check</span><br><span class='tag due'>Assignment 3 released</span> Released; end of week 9<br><span class='tag'>Capstone</span> Capstone window (brief W9 - defense W16)</td></tr>
+<tr><td class='wk'>W10<br><span class='dates'></span></td><td><span class='lec'>L18</span> Enterprise Wireless & Rogue Defense<br><span class='theme'>CLO-8</span></td><td><span class='lec'>L20</span> Cloud Networking II — Hybrid & Assurance<br><span class='theme'>CLO-13</span></td><td><span class='tag'>Lab-10</span> WPA-Enterprise Build + Cloud Flow Logs</td><td><span class='tag quiz'>Quiz 4</span> Graded quiz, in-class, 20 min<br><span class='tag'>Capstone</span> Capstone window (brief W9 - defense W16)</td></tr>
+<tr><td class='wk'>W11<br><span class='dates'></span></td><td><span class='lec'>L21</span> Monitoring Foundations<br><span class='theme'>CLO-12</span></td><td><span class='lec'>L22</span> IDS/IPS — Signatures & Tuning<br><span class='theme'>CLO-9</span></td><td><span class='tag'>Lab-11</span> Flow Collector + Suricata Ruleset</td><td><span class='tag'>Self-check</span><br><span class='tag due'>Assignment 4 released</span> Released; end of week 11<br><span class='tag'>Capstone</span> Capstone window (brief W9 - defense W16)</td></tr>
+<tr><td class='wk'>W12<br><span class='dates'></span></td><td><span class='lec'>L23</span> Zeek & Anomaly Detection<br><span class='theme'>CLO-9, CLO-12</span></td><td><span class='lec'>L24</span> Vulnerability Management Cycle<br><span class='theme'>CLO-10</span></td><td><span class='tag'>Lab-12</span> Zeek Analysis + Vulnerability→Hardening→Verify Cycle</td><td><span class='tag'>Self-check</span><br><span class='tag due'>Assignment 5 released</span> Released; end of week 12<br><span class='tag'>Capstone</span> Capstone window (brief W9 - defense W16)</td></tr>
+<tr><td class='wk'>W13<br><span class='dates'></span></td><td><span class='lec'>L25</span> IR Lifecycle & Preparation<br><span class='theme'>CLO-11</span></td><td><span class='lec'>L26</span> Detection, Triage & Containment<br><span class='theme'>CLO-11, CLO-12</span></td><td><span class='tag'>Lab-13</span> Incident Triage on a Staged Intrusion</td><td><span class='tag'>Self-check</span><br><span class='tag due'>Assignment 6 released</span> Released; end of week 13<br><span class='tag'>Capstone</span> Capstone window (brief W9 - defense W16)<br><span class='tag'>Case Set C</span> advanced x2 + expert x1</td></tr>
+<tr><td class='wk'>W14<br><span class='dates'></span></td><td><span class='lec'>L27</span> Eradication, Recovery & Lessons Learned<br><span class='theme'>CLO-11</span></td><td><span class='lec'>L28</span> SOC Operations & Threat Hunting<br><span class='theme'>CLO-12</span></td><td><span class='tag'>Lab-14</span> IR Tabletop + Guided Threat Hunt</td><td><span class='tag quiz'>Quiz 5</span> Graded quiz, in-class, 20 min<br><span class='tag'>Capstone</span> Capstone window (brief W9 - defense W16)</td></tr>
+<tr><td class='wk'>W15<br><span class='dates'></span></td><td><span class='lec'>L29</span> Forensic Fundamentals<br><span class='theme'>CLO-14</span></td><td><span class='lec'>L30</span> Advanced Forensics & Reporting<br><span class='theme'>CLO-14, CLO-15</span></td><td><span class='tag'>Lab-15</span> Forensic Timeline & Findings Report</td><td><span class='tag'>Self-check</span><br><span class='tag due'>Assignment 7 released</span> Released; end of week 15<br><span class='tag'>Capstone</span> Capstone window (brief W9 - defense W16)</td></tr>
+<tr><td class='wk'>W16<br><span class='dates'></span></td><td><span class='lec'>L31</span> Capstone Workshop & IR Simulation<br><span class='theme'>CLO-11, CLO-15</span></td><td><span class='lec'>L32</span> Capstone Defense & Course Synthesis<br><span class='theme'>CLO-14, CLO-15</span></td><td><span class='tag'>Lab-16</span> Capstone IR Simulation</td><td><span class='tag'>Self-check</span><br><span class='tag exam'>FINAL</span> Written synthesis + forensic practical<br><span class='tag'>Capstone</span> Capstone window (brief W9 - defense W16)</td></tr>
+</tbody>
+</table>
+<p class="theme">All scenarios in this course are simulated for education; practical work runs only on the isolated, authorized lab range. Generated by docs-meta/generate_calendar.py &mdash; regenerate after editing calendar-config.json or course content.</p>
+</div>
+</body>
+</html>

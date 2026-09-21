@@ -1,0 +1,76 @@
+name: Deploy site to GitHub Pages
+
+# Deploys the student-facing MkDocs Material site.
+# Safety model:
+#   - mkdocs docs_dir is site-src/ (student tree). instructor/ and teaching/
+#     are never in the build input.
+#   - leak-scan gate scans the BUILT output for instructor-only markers and
+#     fails the job before upload if any are found.
+#   - strict mode fails the build on broken links / missing nav pages.
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Allow only one concurrent deployment; do not cancel in-progress runs.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install MkDocs Material
+        run: pip install "mkdocs-material==9.7.7" "mkdocs-minify-plugin==0.8.0"  # pinned; bump deliberately
+
+      - name: Copy canonical student content into site-src
+        run: python docs-meta/build_site_content.py
+
+      - name: Generate semester calendar views
+        run: python docs-meta/generate_calendar.py
+
+      - name: Build site (strict)
+        run: mkdocs build --strict
+
+      - name: Leak-scan built output for instructor-only content
+        run: |
+          set -e
+          HITS=$(grep -rniE "instructor-only: true|never-publish-to-students|INSTRUCTOR ONLY|answer key —|teaching/(speaker-notes|answer-keys|lab-answer-keys|case-solutions)|instructor/answer-keys" site/ || true)
+          if [ -n "$HITS" ]; then
+            echo "::error::Instructor-only markers found in built site:"
+            echo "$HITS"
+            exit 1
+          fi
+          echo "Leak scan clean: no instructor-only markers in site/."
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

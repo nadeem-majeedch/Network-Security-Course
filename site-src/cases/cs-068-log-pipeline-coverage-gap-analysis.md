@@ -1,0 +1,68 @@
+# cs-068 — Log-Pipeline Coverage Gap Analysis
+
+> **Simulated scenario.** The estate, pipeline inventory, and gap are fictional.
+
+## Difficulty & Domain
+
+- **Difficulty:** Advanced · **Domain:** Network monitoring and log analysis · **CLO:** CLO-12
+- **Est. time:** 15 minutes · **Anchor:** L21 (Network Monitoring Foundations)
+
+## Scenario
+
+A fintech's SIEM ingests 14 log sources. A tabletop exercise exposed a
+gap: the team answered "we'd see X" for several attack steps the logs
+*cannot actually show*. You must run the coverage-gap analysis: map each
+attack step to required telemetry, mark present/partial/absent, and
+produce the fix backlog with cost/order — the *gaps*, not the dashboards.
+
+## Stakeholders
+
+- **SOC lead** — owns the honest coverage matrix.
+- **Compliance** — wants "monitored" claims that survive a test.
+- **Platform teams** — own the log sources; fixes cost their time.
+- **CISO** — the tabletop exposed over-claiming; wants truth + a plan.
+
+## Network Context
+
+**Current ingestion (14 sources):** AD auth events, VPN concentrator,
+firewall (deny+allow summary), proxy (URL+user), EDR process (480
+laptops), DNS resolver query log, cloud VPC flow, k8s audit (partial),
+switch syslog (port up/down), mail gateway, backup server (job-level),
+HR system (joiner/leaver, daily), badge system (physical), threat-intel
+feeds.
+
+**Attack steps from the tabletop (what the team claimed coverage for):**
+(1) phishing → credential capture; (2) VPN login with stolen creds;
+(3) internal recon from VPN session; (4) SMB staging to file server;
+(5) cloud-exfil via NAT egress; (6) log-source tampering on the firewall;
+(7) persistence via scheduled task on laptop.
+
+## Student Task
+
+1. Build the **coverage matrix**: each attack step → telemetry *required*
+   → present/partial/absent in the 14 sources → the specific gap (be
+   precise: "VPN exists" ≠ "VPN geo+time+device correlation exists").
+2. Identify the **two most dangerous gaps** (attack steps claimed as
+   covered but actually blind) and say why tabletop over-claiming
+   happened (the meta-lesson: dashboards ≠ coverage).
+3. Produce the **fix backlog** (6 items max): per fix — what telemetry
+   is added, what step it enables detecting, cost tier (config / project
+   / procurement), and order.
+
+## How to Approach This (Reasoning Scaffold)
+
+- Coverage = *step-level*, not source-level: "we have VPN logs" answers
+  nothing; "VPN + HR-leaver feed + EDR device-correlation answers step 2"
+  answers it.
+- The nastiest gaps are where a source *exists* but lacks the field/
+  correlation that the step needs (partial ≠ present).
+- Tampering (step 6) is special: the sensor that reports on itself —
+  the fix is off-box evidence, not more local logging.
+
+## CLO Mapping
+
+- **CLO-12** — Detection-coverage engineering at step level.
+
+## Safety Notes
+
+- Design exercise; tabletop findings are simulated.

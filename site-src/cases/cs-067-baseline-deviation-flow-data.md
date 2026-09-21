@@ -1,0 +1,82 @@
+# cs-067 — Baseline Deviation in Flow Data
+
+> **Simulated scenario.** The factory, flow baselines, and deviation are fictional.
+
+## Difficulty & Domain
+
+- **Difficulty:** Advanced · **Domain:** Network monitoring and log analysis · **CLO:** CLO-12
+- **Est. time:** 15 minutes · **Anchor:** L21 (Network Monitoring Foundations)
+
+## Scenario
+
+A manufacturing plant's flow monitoring flags "deviation" on the OT
+network. Three deviations are listed below — one is an attack, one is a
+legitimate change, one is a monitoring artifact. You must adjudicate each
+using *baseline mechanics*: what a baseline is, why it lies, and what
+evidence separates the three.
+
+## Stakeholders
+
+- **Plant OT team** — hates false alarms during production runs.
+- **SOC** — must adjudicate remotely with limited OT context.
+- **Plant manager** — production line is live; "check it quietly."
+- **Auditor** — the monitoring system's credibility is on display.
+
+## Network Context
+
+- OT VLANs: PLCs ↔ engineering workstation (fixed pairs), historian
+  collector → PLCs (poll every 5 s), historian → corp reporting (1×/h).
+- Baseline: 30-day, per src-dst-port tuple, volume + periodicity; alert
+  on >3σ volume deviation OR new tuple appearance OR periodicity shift.
+- Recent changes (undisclosed to you): a patching window was scheduled;
+  a new QA workstation was installed Tuesday.
+
+## Available Evidence
+
+**Deviations flagged this week:**
+
+| # | Deviation | Details | When |
+|---|---|---|---|
+| D1 | New tuple | `10.40.7.55 → 10.40.7.20:44818` (PLC class) — never seen in 30 d | Tue 10:00,持续 4 h, low volume |
+| D2 | Periodicity shift | historian→PLC polls: 5 s → ~4.7 s average, sustained 3 d | Mon onward |
+| D3 | Volume spike | engineer-ws → PLC:44818: 3× baseline volume, 40 min | Wed 02:00–02:40 |
+
+Context: plant firmware-update tooling exists (uses 44818); QA
+workstation install (Tue) was ticketed but the baseline tool wasn't told;
+the poll-interval change would follow a controller firmware/scan-rate
+change — or a PLC being replaced with a counterfeit/misconfigured unit
+(the attack scenario the OT team fears).
+
+## Student Task
+
+1. Build the **adjudication table**: each deviation → most likely
+   explanation → discriminating evidence (what specific check settles
+   it) → verdict confidence. One of the three is the attack — argue
+   which and why the others are benign.
+2. Explain **why baselines lie**: three distinct failure modes of
+   30-day baselines (drift, unannounced change, attacker-shaped-as-change)
+   — and which failure mode each deviation exercises.
+3. Design the **baseline-hygiene loop**: the change-feed integration,
+   the "shadow period" practice (monitor-not-alert for N days after
+   known changes), and the one check that would have auto-cleared D1.
+
+## How to Approach This (Reasoning Scaffold)
+
+- Deviation ≠ attack: the baseline is a *model* of last month, not of
+  intent. Adjudicate by asking "what changed in the world?" before
+  "what's wrong in the world?"
+- D1's discriminator is *identity* (is .55 the new QA workstation? the
+  ticket says so); D2's is *config* (who changed poll rate?); D3's is
+  *process* (is there a 02:00 firmware window?).
+- The attack class here is "impersonate a maintenance pattern" — the
+  discriminator is out-of-band verification (ticket, change log, vendor
+  window), not flow math alone.
+
+## CLO Mapping
+
+- **CLO-12** — Baseline analytics and deviation adjudication.
+
+## Safety Notes
+
+- Simulated OT telemetry; OT touch rules apply (no active probing of
+  production PLCs).

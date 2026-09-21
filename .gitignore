@@ -1,0 +1,21 @@
+# Build outputs
+site/
+.venv*/
+venv/
+node_modules/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+
+# Generated calendar artifact (emitted only when start_date is configured)
+docs-meta/calendar.ics
+
+# OS / editor noise
+.DS_Store
+Thumbs.db
+*.swp
+.freebuff/
+

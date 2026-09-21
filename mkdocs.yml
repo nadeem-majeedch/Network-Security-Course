@@ -1,0 +1,138 @@
+# MkDocs Material configuration for the Network Security Course site.
+#
+# Publication model (safety-critical):
+#   docs_dir is `site-src/` — a dedicated STUDENT-FACING source tree.
+#   The instructor/ and teaching/ trees live OUTSIDE docs_dir, so
+#   instructor-only content is not merely nav-excluded — it is not in the
+#   build input at all. The CI leak-scan gate double-checks the OUTPUT.
+#
+# Site content strategy: canonical student files (docs/lectures,
+# docs/labs, modules/*/case-studies, syllabus/) are copied into
+# site-src/ by docs-meta/build_site_content.py (invoked by the deploy workflow
+# before `mkdocs build`). The generator also rewrites instructor-key path
+# references out of student pages and emits cases/all-cases.md.
+# Hand-written pages in site-src/ provide home, course description,
+# CLOs, calendar, assessment info, resources, and references.
+
+# All site sources live in site-src/ (see Publication model above).
+docs_dir: site-src
+
+site_name: Network Security Course
+site_description: >-
+  A 16-week, 32-lecture university course on network security for
+  BS Computer Science and BS Data Science students: protocol-grounded
+  defense, hands-on labs, 100 case studies, and a full assessment layer.
+site_author: Network Security Course Team
+site_url: https://nadeem-majeedch.github.io/Network-Security-Course/
+repo_url: https://github.com/nadeem-majeedch/Network-Security-Course
+repo_name: nadeem-majeedch/Network-Security-Course
+edit_uri: blob/main/site-src/
+
+copyright: >
+  Course materials for teaching use. All scenarios are simulated for
+  education; defensive framing throughout.
+
+theme:
+  name: material
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.expand
+    - navigation.top
+    - navigation.indexes
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+    - content.tabs.link
+  palette:
+    # Accessible light/dark with sufficient contrast
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/weather-night
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to light mode
+  icon:
+    repo: fontawesome/brands/github
+
+plugins:
+  - search            # built-in search (supported by Material)
+  - minify:
+      minify_html: true
+
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.highlight
+  - pymdownx.inlinehilite
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - tables
+  - toc:
+      permalink: true   # accessible heading anchors
+  - attr_list
+  - md_in_html
+
+# Validation policy (enforced by docs-meta/validate_site.py + CI):
+#  - strict mode ON so broken internal links FAIL the build
+#  - instructor markers must not appear in the OUTPUT tree
+strict: true
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/nadeem-majeedch/Network-Security-Course
+      name: Course repository
+
+# NOTE: navigation is generated for lecture/lab/case pages is NOT used —
+# explicit nav below guarantees deterministic structure and lets the QA
+# check verify every page is reachable.
+nav:
+  - Home: index.md
+  - Course:
+      - Course Description: course/description.md
+      - Learning Outcomes (CLOs): course/clos.md
+      - Semester Calendar: course/calendar-generated.md
+      - 16-Week Calendar: course/calendar.md
+  - Modules:
+      - modules/README.md
+      - modules/m01/index.md
+      - modules/m02/index.md
+      - modules/m03/index.md
+      - modules/m04/index.md
+      - modules/m05/index.md
+      - modules/m06/index.md
+      - modules/m07/index.md
+      - modules/m08/index.md
+  - Lectures: lectures/index.md
+  - Lab Workbook: labs/index.md
+  - Case Studies: cases/index.md
+  - Assessment:
+      - assessment/index.md
+      - Quizzes & Self-Checks: assessment/quizzes.md
+      - Assignments: assessment/assignments.md
+      - Exams: assessment/exams.md
+      - Capstone: assessment/capstone.md
+  - Student Resources: resources/student.md
+  - References: references.md
+  - About:
+      - Instructor Resources: about/instructor-resources.md
+      - Site QA Report: about/qa-report.md

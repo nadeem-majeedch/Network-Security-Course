@@ -1,0 +1,68 @@
+# cs-077 — Remediation-SLA Design by Asset Criticality
+
+> **Simulated scenario.** The estate, SLA proposal, and history are fictional.
+
+## Difficulty & Domain
+
+- **Difficulty:** Expert · **Domain:** Vulnerability prioritization · **CLO:** CLO-10
+- **Est. time:** 15 minutes · **Anchor:** L24 (Vulnerability Management Cycle)
+
+## Scenario
+
+A retailer's new CISO proposes SLAs: "Critical = 7 days, High = 30,
+Medium = 90, Low = 180 — for everything." The board loves it. Ops and
+OT teams don't. You must stress-test the design: where the flat
+severity-based SLA breaks (OT, internet-facing, legacy-frozen), how
+criticality reshapes it into a **two-dimensional SLA matrix**, and the
+metrics that prove the program works (or honestly fails).
+
+## Stakeholders
+
+- **CISO** — board-committed to the flat SLA; needs face-saving rigor.
+- **IT ops** — capacity reality: patch windows, regression testing.
+- **OT plant team** — "7-day SLA on a running PLC line" = shutdown.
+- **Compliance** — PCI/internet-facing expectations.
+
+## Network Context
+
+- Estate: 40 stores (POS), 2 DCs, 1 plant (OT), 800 laptops, cloud
+  estate.
+- Asset criticality classes: internet-facing revenue (POS backends, API),
+  revenue-adjacent (POS itself), productivity (laptops), safety (OT),
+  isolated (backups).
+- Capacity: 2 patch windows/month (4 h each), fleet tools for laptops,
+  manual for OT.
+
+## Student Task
+
+1. Identify the **flat-SLA failure modes** (≥4): where "Critical=7 days
+   for everything" is simultaneously too strict and too lax — with the
+   concrete conflict each failure produces (e.g., 7-day OT shutdown vs
+   180-day internet-facing Medium that *is* the real risk).
+2. Design the **two-dimensional SLA matrix**: criticality class ×
+   severity band → SLA (days) — with the *exception pathways* (OT
+   compensating controls; legacy-frozen devices; vendor-dependent
+   patches) and the promotion/trigger rules.
+3. Produce the **program metrics** (5): compliance rate by matrix cell,
+   exception rate + aging, mean-time-to-remediate by class, *risk
+   trend* (total context-weighted risk open), and the honest-metric
+   warning (what gaming looks like per metric).
+
+## How to Approach This (Reasoning Scaffold)
+
+- SLA = *commitment*, not aspiration: it must be capacity-backed or it
+  becomes a lying dashboard (cs-070's over-claim lesson at the
+  program level).
+- Two dimensions beat one: severity (the vuln) × criticality (the
+  asset) — the 7-day-PLC and 180-day-internet-Medium conflicts
+  dissolve when both axes exist.
+- Exception pathways are where programs live or die: OT gets
+  *compensating-control SLAs*, not ignored findings.
+
+## CLO Mapping
+
+- **CLO-10** — Remediation-program design with SLA engineering.
+
+## Safety Notes
+
+- Design exercise; OT constraints honored.
