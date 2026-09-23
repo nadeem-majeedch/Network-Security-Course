@@ -82,4 +82,4 @@ set, a `calendar.ics` (32 events) is emitted. Details:
 
 Course materials for teaching use. All incidents, organizations, and
 telemetry in examples, labs, and cases are **simulated fiction**. Techniques
-are taught defensively and practiced only in the authorized lab range.
+are taught defensively and practiced only in the authorized lab range..
